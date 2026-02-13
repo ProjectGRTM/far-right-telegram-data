@@ -88,7 +88,7 @@ By using this dataset, you agree to respect the privacy of individuals and adher
 
 ## License
 
-This repository is licensed under the Creative Commons Attribution 4.0 International (CC BY 4.0).
+This repository is licensed under the Creative Commons Attribution 4.0 International Share-Alike (CC BY-SA 4.0).
 
 The dataset is obtained from public Telegram channels and groups. While we provide the data in this repository, please ensure you follow Telegram's Terms of Service and data privacy laws when using this dataset.
 
