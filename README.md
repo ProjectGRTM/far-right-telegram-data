@@ -21,6 +21,8 @@ The repository is organized into several directories containing various componen
 
 The dataset used in this project is obtained from public Telegram channels and groups. The data consists of messages and interactions, which were processed into CSV format. 
 
+Includes a broad array of far-right movements and groups such as: white supremacists, ultranationalists, identitarians, neo-Nazis, esoteric Nazism, Christian Nationalists, accelerationists of different colors, great replacement thinking and other conspiracy theories, militias, other vaguely defined extremists, and many more. Also includes contemporary movements such as the Active Clubs, Patriot Front, Atomwaffen related groups, Oath Keepers, Nordic Resistance Movement, Patriotic Alternative, Patriot Movement, and, indeed, many more.
+
 ### Data Description:
 
 - The processed data is stored in the `data/` directory. It includes multiple CSV files that have been chunked to fit into BERT-based topic models.
