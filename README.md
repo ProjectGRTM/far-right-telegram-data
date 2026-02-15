@@ -22,10 +22,10 @@ The repository is organized into several directories containing various componen
 The dataset used in this project is obtained from public Telegram channels and groups. The data consists of messages and interactions, which were processed into CSV format. 
 
 Includes a broad array of far-right movements and groups such as: 
-- White supremacists, ultranationalists, identitarians, neo-Nazis, esoteric Nazism, Christian Nationalists, accelerationists of different colors, great replacement thinking and other conspiracy theories, militias, other vaguely defined extremists, and many more. 
-- Also includes contemporary movements such as the Active Clubs, Patriot Front, Atomwaffen related groups, Oath Keepers, Nordic Resistance Movement, Patriotic Alternative, Patriot Movement, and, indeed, many more.
-- Thinktanks such as the The Heritage Foundation and White Paper Institute.
-- Right-wing influencers such as 
+- White supremacists, ultranationalists, identitarians, neo-Nazis, esoteric Nazism, Christian Nationalists, accelerationists of different colors, great replacement thinking and other conspiracy theories, militias, other vaguely defined extremists, ecofascists, tradwives, and many more. 
+- Also includes contemporary movements such as the Active Clubs, Atomwaffen related groups, Junge Nationalisaten, Patriot Front, Oath Keepers, Nordic Resistance Movement, Patriotic Alternative, Patriot Movement, and, indeed, many more.
+- Thinktanks such as the White Papers Institute.
+- Right-wing influencers and platforms such as Red Ice TV, Joel Davis, MEDIA2RISE, etc.
 
 Post-level data and various fields including: channel ID's, channel names, message ID's, message texts, engagement metrics (views, number of replies, etc.), forwards, message links, media type contained, domain, url, and about a dozen more fields.
 
