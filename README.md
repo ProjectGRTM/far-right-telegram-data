@@ -2,7 +2,7 @@
 
 # The Far-Right Telegram Ecosystem Dataset (1025 Channels, 5.7M+ Posts)
 
-This repository contains public Telegram data of 1025 far-right groups used to apply BERT-based topic modeling. The dataset contains over 5.7 million public posts posted between 2019-2024. 
+This repository contains public Telegram data of 1025 far-right groups used to apply BERT-based topic modeling. The dataset contains over 5.7 million public posts posted between 2019-2024.
 
 The repo includes processed data, BERT model example outputs, and other materials used in the corresponding paper (to be published).
 
@@ -17,15 +17,42 @@ The repository is organized into several directories containing various componen
 - `figures/`: Contains figures used in the associated paper in JPG format.
 - `model-output/`: Contains the output of the topic model in CSV format, including topic labels and related data.
 
+## Running the Model
+
+`run-model.py` (and the equivalent `run-model.ipynb` notebook) runs BERTopic on a filtered subset of channels. It reads the data from `data/`, filters by channel names in `docs/network-channel-names.csv`, fits a topic model, and writes the results to `output/`.
+
+### Prerequisites
+
+This project uses [uv](https://docs.astral.sh/uv/) to manage Python and dependencies. Install it by following the instructions at https://docs.astral.sh/uv/getting-started/installation/. You do not need to install Python or any packages yourself. `uv` handles all of that automatically based on the `pyproject.toml` in this repository.
+
+### Running the script
+
+From the root of this repository, run:
+
+```bash
+uv run run-model.py
+```
+
+On the first run, `uv` will download the correct Python version and install all required packages. Subsequent runs reuse the cached environment. Output files are written to `output/`.
+
+The script caches processed documents and embeddings in `.cache/` to avoid recomputing them on subsequent runs. To force a fresh run (e.g., if you changed the input data), use:
+
+```bash
+uv run run-model.py --no-cache
+```
+
 ## Dataset
 
-The dataset used in this project is obtained from public Telegram channels and groups. The data consists of messages and interactions, which were processed into CSV format. 
+The dataset used in this project is obtained from public Telegram channels and groups.
+This data was collected using [telegram-tracker](https://github.com/estebanpdl/telegram-tracker).
+The data consists of messages and interactions, which were processed into CSV format.
 
-Includes a broad array of far-right movements and groups such as: 
-- White supremacists, ultranationalists, identitarians, neo-Nazis, esoteric Nazism, Christian Nationalists, accelerationists of different colors, great replacement thinking and other conspiracy theories, militias, other vaguely defined extremists, and many more. 
+Includes a broad array of far-right movements and groups such as:
+
+- White supremacists, ultranationalists, identitarians, neo-Nazis, esoteric Nazism, Christian Nationalists, accelerationists of different colors, great replacement thinking and other conspiracy theories, militias, other vaguely defined extremists, and many more.
 - Also includes contemporary movements such as the Active Clubs, Patriot Front, Atomwaffen related groups, Oath Keepers, Nordic Resistance Movement, Patriotic Alternative, Patriot Movement, and, indeed, many more.
 - Thinktanks such as the The Heritage Foundation and White Paper Institute.
-- Right-wing influencers such as 
+- Right-wing influencers such as
 
 Post-level data and various fields including: channel ID's, channel names, message ID's, message texts, engagement metrics (views, number of replies, etc.), forwards, message links, media type contained, domain, url, and about a dozen more fields.
 
@@ -35,8 +62,56 @@ The data was obtained via the Telegram API using iterative snowball sampling for
 
 - The processed data is stored in the `data/` directory. It includes 571 CSV files each with 10,000 rows that have been chunked to fit into BERT-based topic models. The data is preprocessed and thus easily parseable with Pandas.
 - Each row is a post and contains the following fields/colums:
-    signature,channel_id,channel_name,msg_id,message,cleaned_message,date,msg_link,msg_from_peer,msg_from_id,views,number_replies,number_forwards,is_forward,forward_msg_from_peer_type,forward_msg_from_peer_id,forward_msg_from_peer_name,forward_msg_date,forward_msg_date_string,forward_msg_link,is_reply,reply_to_msg_id,reply_msg_link,contains_media,media_type,has_url,url,domain,url_title,url_description,document_type,document_id,document_video_duration,document_filename,poll_id,poll_question,poll_total_voters,poll_results,contact_phone_number,contact_name,contact_userid,geo_type,lat,lng,venue_id,venue_type,venue_title,venue_address,venue_provider
-  
+  - `signature`
+  - `channel_id`
+  - `channel_name`
+  - `msg_id`
+  - `message`
+  - `cleaned_message`
+  - `date`
+  - `msg_link`
+  - `msg_from_peer`
+  - `msg_from_id`
+  - `views`
+  - `number_replies`
+  - `number_forwards`
+  - `is_forward`
+  - `forward_msg_from_peer_type`
+  - `forward_msg_from_peer_id`
+  - `forward_msg_from_peer_name`
+  - `forward_msg_date`
+  - `forward_msg_date_string`
+  - `forward_msg_link`
+  - `is_reply`
+  - `reply_to_msg_id`
+  - `reply_msg_link`
+  - `contains_media`
+  - `media_type`
+  - `has_url`
+  - `url`
+  - `domain`
+  - `url_title`
+  - `url_description`
+  - `document_type`
+  - `document_id`
+  - `document_video_duration`
+  - `document_filename`
+  - `poll_id`
+  - `poll_question`
+  - `poll_total_voters`
+  - `poll_results`
+  - `contact_phone_number`
+  - `contact_name`
+  - `contact_userid`
+  - `geo_type`
+  - `lat`
+  - `lng`
+  - `venue_id`
+  - `venue_type`
+  - `venue_title`
+  - `venue_address`
+  - `venue_provider`
+
 We ensured respect for Telegram's [Terms of Service](https://telegram.org/tos) and data privacy laws (e.g., GDPR, CCPA) when working with this dataset.
 
 ### Model Settings
@@ -44,34 +119,38 @@ We ensured respect for Telegram's [Terms of Service](https://telegram.org/tos) a
 The BERT-based topic modeling pipeline includes the following settings:
 
 1. **CountVectorizer**:
-    - **stop_words**: 'english' (removes common English stopwords)
-    - **min_df**: 2 (ignores terms that appear in fewer than 2 documents)
-    - **ngram_range**: (1, 2) (uses unigrams and bigrams)
+
+   - **stop_words**: 'english' (removes common English stopwords)
+   - **min_df**: 2 (ignores terms that appear in fewer than 2 documents)
+   - **ngram_range**: (1, 2) (uses unigrams and bigrams)
 
 2. **HDBSCAN** (for clustering topics):
-    - **min_cluster_size**: 150 (minimum size of each cluster)
-    - **metric**: 'euclidean' (distance metric for clustering)
-    - **cluster_selection_method**: 'eom' (used for selecting clusters)
-    - **prediction_data**: True (enables prediction on new data)
+
+   - **min_cluster_size**: 150 (minimum size of each cluster)
+   - **metric**: 'euclidean' (distance metric for clustering)
+   - **cluster_selection_method**: 'eom' (used for selecting clusters)
+   - **prediction_data**: True (enables prediction on new data)
 
 3. **UMAP** (for dimensionality reduction):
-    - **n_neighbors**: 15 (number of neighboring points used for manifold approximation)
-    - **n_components**: 5 (reduces the data to 5 components for the clustering)
-    - **min_dist**: 0.0 (controls how tightly UMAP packs points together)
-    - **metric**: 'cosine' (distance metric for UMAP)
+
+   - **n_neighbors**: 15 (number of neighboring points used for manifold approximation)
+   - **n_components**: 5 (reduces the data to 5 components for the clustering)
+   - **min_dist**: 0.0 (controls how tightly UMAP packs points together)
+   - **metric**: 'cosine' (distance metric for UMAP)
 
 4. **BERTopic** (the main topic model):
-    - **embedding_model**: Your BERT embedding model (e.g., `bert-base-uncased`)
-    - **umap_model**: UMAP model used for dimensionality reduction
-    - **vectorizer_model**: CountVectorizer model used for tokenization
-    - **top_n_words**: 20 (number of top words to display for each topic)
-    - **verbose**: True (provides detailed output during the topic modeling process)
+
+   - **embedding_model**: Your BERT embedding model (e.g., `bert-base-uncased`)
+   - **umap_model**: UMAP model used for dimensionality reduction
+   - **vectorizer_model**: CountVectorizer model used for tokenization
+   - **top_n_words**: 20 (number of top words to display for each topic)
+   - **verbose**: True (provides detailed output during the topic modeling process)
 
 5. **UMAP for Reduced Embeddings**:
-    - **n_neighbors**: 10 (number of neighboring points for the reduced space)
-    - **n_components**: 2 (reduces the embeddings to 2 components for visualization)
-    - **min_dist**: 0.0 (controls how tightly UMAP packs points together)
-    - **metric**: 'cosine' (distance metric for UMAP)
+   - **n_neighbors**: 10 (number of neighboring points for the reduced space)
+   - **n_components**: 2 (reduces the embeddings to 2 components for visualization)
+   - **min_dist**: 0.0 (controls how tightly UMAP packs points together)
+   - **metric**: 'cosine' (distance metric for UMAP)
 
 # Example of reduced embeddings visualization
 
@@ -81,7 +160,7 @@ reduced_embeddings = UMAP(n_neighbors=10, n_components=2, min_dist=0.0, metric='
 
 ## Results
 
-The topic modeling results are stored in the `model-output/` folder in CSV format. 
+The topic modeling results are stored in the `model-output/` folder in CSV format.
 
 ## Figures
 
