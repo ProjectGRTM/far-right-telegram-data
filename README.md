@@ -43,7 +43,9 @@ uv run run-model.py --no-cache
 
 ## Dataset
 
-The dataset used in this project is obtained from public Telegram channels and groups. The data consists of messages and interactions, which were processed into CSV format.
+The dataset used in this project is obtained from public Telegram channels and groups.
+This data was collected using [telegram-tracker](https://github.com/estebanpdl/telegram-tracker).
+The data consists of messages and interactions, which were processed into CSV format.
 
 Includes a broad array of far-right movements and groups such as:
 
