@@ -1,12 +1,3 @@
-# /// script
-# requires-python = ">=3.12,<3.14"
-# dependencies = [
-#     "bertopic>=0.17.4",
-#     "natsort>=8.4.0",
-#     "pandas>=3.0.0",
-# ]
-# ///
-
 import os
 import sys
 
@@ -178,6 +169,8 @@ topic_info = topic_model.get_topic_info()
 save_path_topics = "./output/topic-info.csv"
 topic_info.to_csv(save_path_topics, index=False, encoding="utf-8")
 log(f"Topic info saved to {save_path_topics}")
+
+import kaleido
 
 log("Start visualizing top 100 topics")
 # Visualize topics

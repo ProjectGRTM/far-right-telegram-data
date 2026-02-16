@@ -45,8 +45,9 @@ The dataset used in this project is obtained from public Telegram channels and g
 
 This data was collected using [telegram-tracker](https://github.com/estebanpdl/telegram-tracker).
 
-Includes a broad array of far-right movements and groups such as: 
-- White supremacists, ultranationalists, identitarians, neo-Nazis, esoteric Nazism, Christian Nationalists, accelerationists of different colors, great replacement thinking and other conspiracy theories, militias, ecofascists, tradwives, and many more. 
+Includes a broad array of far-right movements and groups such as:
+
+- White supremacists, ultranationalists, identitarians, neo-Nazis, esoteric Nazism, Christian Nationalists, accelerationists of different colors, great replacement thinking and other conspiracy theories, militias, ecofascists, tradwives, and many more.
 - Also includes contemporary movements such as the Active Clubs, Atomwaffen related groups, Junge Nationalisaten, Patriot Front, Oath Keepers, Nordic Resistance Movement, Patriotic Alternative, Patriot Movement, and, indeed, many more.
 - Thinktanks such as the White Papers Institute.
 - Right-wing influencers and platforms such as Red Ice TV, Joel Davis, MEDIA2RISE, etc.
